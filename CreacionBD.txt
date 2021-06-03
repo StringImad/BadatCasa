@@ -1,0 +1,63 @@
+drop database if exists proyectoProgramacionImad;
+create database proyectoProgramacionImad;
+use proyectoProgramacionImad;
+create table if not exists usuario
+(codusuario int auto_increment,
+nombre varchar(20),
+apellido varchar(20),
+dni char(10),
+tlf char(9),
+direccion varchar(80),
+constraint pk_usuario primary key (codusuario)); 
+
+insert into usuario values(1,'nom1','ape1','A11111111','611111111','dire1');
+insert into usuario values(2,'nom2','ape2','A11111112','611111112','dire2');
+insert into usuario values(3,'nom3','ape3','A11111113','611111113','dire3');
+
+create table if not exists conductor
+(codusuario int,
+codconductor int auto_increment,
+numSegSocial varchar(30),
+NumCuentBanc varchar(30),
+dispo bit,
+constraint pk_conductor primary key (codconductor),
+constraint fk_conductor_usuario foreign key (codusuario)
+references usuario(codusuario)
+on delete no action on update cascade);
+insert into conductor values(1, 1,'11A','11B',false);
+insert into conductor values(2, 2,'21A','11B',false);
+insert into conductor values(3, 3,'31A','11B',true);
+
+
+
+create table if not exists pasajero
+(codpasajero int auto_increment,
+codusuario int, 
+direccionRecogida varchar(80),
+constraint pk_pasajero primary key (codpasajero),
+constraint fk_pasajero_usuario foreign key (codusuario)
+references usuario(codusuario)
+on delete no action on update cascade);
+
+insert into pasajero values(1,1,'Calle 1');
+insert into pasajero values(2,2,'Calle 2');
+insert into pasajero values(3,3,'Calle 3');
+
+
+create table if not exists viaje
+(codviaje int auto_increment,
+puntorecogida varchar(80),
+tipopago enum ("tarjeta", "efectivo"),
+tiempo int,
+precio decimal(5,2),
+codpasajero int,
+codconductor int,
+constraint pk_viaje primary key (codviaje),
+constraint  fk_viaje_pasajero foreign key (codpasajero)
+references pasajero(codpasajero)
+on delete no action on update cascade,
+constraint  fk_viaje_conductor foreign key (codconductor)
+references conductor(codconductor)
+on delete no action on update cascade);
+
+insert into viaje values(1, 'calle 2', 'tarjeta', 12, 10, 3, 2);
