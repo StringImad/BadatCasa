@@ -13,7 +13,7 @@ public class BD_ControladorConductorCRUD {
 	private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("bd_Imad_Movimad");
 	private EntityManager em;
 	private Query consulta;
-	public void borrarPasajero(Conductor user) {
+	public void borrarConductor(Conductor user) {
 		this.em = entityManagerFactory.createEntityManager();
 		Conductor aux = null;
 		this.em.getTransaction().begin();

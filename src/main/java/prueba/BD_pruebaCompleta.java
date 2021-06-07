@@ -13,9 +13,12 @@ import controladores.BD_ControladorViajeCRUD;
 import entidades.Conductor;
 import entidades.Pasajero;
 import entidades.Usuario;
+import servicios.ServicioConductor;
+import servicios.ServicioPasajero;
 import servicios.ServicioUsuario;
 
 public class BD_pruebaCompleta {
+
 	public static void main(String[] args) {
 		Scanner teclado = new Scanner(System.in);
 		// TODO Auto-generated method stub
@@ -87,12 +90,22 @@ public class BD_pruebaCompleta {
 
 					break;
 				case 1:
-					JOptionPane.showMessageDialog(null,
-							"Actualmente tenemos registrados los siguientes pasajeros: \n" + cp.findAll());
+					do {
+						codigo = JOptionPane.showInputDialog(
+								"Actualmente tenemos registrados los siguientes pasajeros: \n" + cp.findAll()+
+								"Escriba el codigo");
+
+					} while (ServicioPasajero.comprobarExistenciaPasajero(Integer.parseInt(codigo)));
+					ServicioPasajero.modificarPasajero(codigo);
 					break;
 				case 2:
-					JOptionPane.showMessageDialog(null,
-							"Actualmente tenemos registrados los siguientes conductores: \n" + cc.findAll());
+					do {
+						codigo = JOptionPane.showInputDialog(
+								"Actualmente tenemos registrados los siguientes conductores: \n" + cc.findAll()+
+								"Escriba el codigo");
+
+					} while (ServicioConductor.comprobarExistenciaConductor(Integer.parseInt(codigo)));
+					ServicioConductor.modificarConductor(codigo);
 					break;
 				case 3:
 					JOptionPane.showMessageDialog(null,
@@ -126,10 +139,13 @@ public class BD_pruebaCompleta {
 				case 1:
 					JOptionPane.showMessageDialog(null,
 							"Actualmente tenemos registrados los siguientes pasajeros: \n" + cp.findAll());
+					ServicioPasajero.InsertarDatosPasajero();
+					
 					break;
 				case 2:
 					JOptionPane.showMessageDialog(null,
 							"Actualmente tenemos registrados los siguientes conductores: \n" + cc.findAll());
+					ServicioConductor.InsertarDatosConductor();
 					break;
 				case 3:
 					JOptionPane.showMessageDialog(null,
@@ -162,10 +178,12 @@ public class BD_pruebaCompleta {
 				case 1:
 					JOptionPane.showMessageDialog(null,
 							"Actualmente tenemos registrados los siguientes pasajeros: \n" + cp.findAll());
+					ServicioPasajero.borrarConductor();
 					break;
 				case 2:
 					JOptionPane.showMessageDialog(null,
 							"Actualmente tenemos registrados los siguientes conductores: \n" + cc.findAll());
+					ServicioConductor.borrarConductor();
 					break;
 				case 3:
 					JOptionPane.showMessageDialog(null,
