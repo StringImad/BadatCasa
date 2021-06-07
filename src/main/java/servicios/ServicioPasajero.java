@@ -22,12 +22,7 @@ public class ServicioPasajero {
 			// declaracion de las variables que contendran los valores que van dentro de
 			// cada campo
 			String direccionRecogida = "";
-			
-			boolean disponible = true;
-			boolean confimacionDisponiblidad = true;
-			String numCuentBanc = "";
-			String numSegSocial = "";
-			String[] botonesDatos = { "Cambiar direccion", "salir" };
+						String[] botonesDatos = { "Cambiar direccion", "salir" };
 
 			Pasajero userModificar = controladorPasajero.findByPK(Integer.parseInt(codPasajero));
 			if (userModificar != null) {
@@ -53,30 +48,8 @@ public class ServicioPasajero {
 		} while (repetir);
 	}
 
-	// metodo que devuelve un string que corresponde a un dni correcto 12345678M
-	private static String controladorNumSSCorrecto() {
-		boolean comprobacion = false;
-		String numSegSocial = "";
-		do {
-			numSegSocial = JOptionPane.showInputDialog("Ingrese el numero de seguridad social");
-//Condicion que nos controla que el numero de caracteres no sea distinto a nueve 
-			// y que el caracter en la posicion 8 es decir el noveno sea una letra
-			if (numSegSocial.length() < 9 || numSegSocial.length() > 15) {
-				JOptionPane.showMessageDialog(null, "Numero incorrecto, el numero de caracteres debe estar entre 9 y 15 :");
-				comprobacion = true;
-			} else {
-				comprobacion = false;
-			}
-		} while (comprobacion);
-
-		return numSegSocial;
-	}
-
 
 	public static Pasajero InsertarDatosPasajero() {
-
-		// BD_ControladorUsuarioCRUD controladorUsuario = new
-		// BD_ControladorUsuarioCRUD();
 
 		// Creamos un objeto de tipo usuario
 		Pasajero pasajero = new Pasajero();
@@ -174,20 +147,5 @@ public class ServicioPasajero {
 			return true;
 		}
 	}
-	public static boolean elegirDisponiblidadConductor() {
-		boolean confimacionDisponiblidad =  true;
-		int disponible = 0;
-		disponible = JOptionPane.showConfirmDialog(null,
-                "¿Está disponible?", "Seleccione una",
-                JOptionPane.YES_NO_OPTION);
-		if(disponible==0) {
-			confimacionDisponiblidad = true;
-		}else {
-			if(disponible==1) {
-				confimacionDisponiblidad = false;
-			}
-		}
-		return confimacionDisponiblidad;
-		
-	}
+
 }

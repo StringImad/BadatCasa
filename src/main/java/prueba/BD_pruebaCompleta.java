@@ -16,6 +16,7 @@ import entidades.Usuario;
 import servicios.ServicioConductor;
 import servicios.ServicioPasajero;
 import servicios.ServicioUsuario;
+import servicios.ServicioViajes;
 
 public class BD_pruebaCompleta {
 
@@ -108,8 +109,13 @@ public class BD_pruebaCompleta {
 					ServicioConductor.modificarConductor(codigo);
 					break;
 				case 3:
-					JOptionPane.showMessageDialog(null,
-							"Actualmente tenemos registrados los siguientes viajes: \n" + cv.findAll());
+					do {
+						codigo = JOptionPane.showInputDialog(
+								"Actualmente tenemos registrados los siguientes viaje: \n" + cv.findAll()+
+								"\nEscriba el codigo del viaje a modificar");
+
+					} while (ServicioViajes.comprobarExistenciaViaje(Integer.parseInt(codigo)));
+					ServicioViajes.modificarViaje(codigo);
 					break;
 				case 4:
 
